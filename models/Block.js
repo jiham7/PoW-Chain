@@ -5,6 +5,8 @@ class Block {
     this.timestamp = Date.now();
     this.nonce = 0;
     this.transactions = [];
+    this.prime = 0;
+
   }
   addTransaction(tx) {
     this.transactions.push(tx);

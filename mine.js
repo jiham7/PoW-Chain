@@ -5,6 +5,8 @@ const db = require('./db');
 const {PUBLIC_KEY} = require('./config');
 const TARGET_DIFFICULTY = BigInt("0x0" + "F".repeat(63));
 const BLOCK_REWARD = 10;
+const currentPrime = db.blockchain.getPrime();
+
 
 let mining = true;
 mine();
@@ -23,23 +25,39 @@ function mine() {
 
   const block = new Block();
 
-  // TODO: add transactions from the mempool
+  const nextPrime = (num = currentPrime) => {
+    while(!isPrime(++num)){
+      block.nonce++;
+    };
+    block.prime = num;
+    db.blockchain.setPrime(num);
+    return num;
+  };
 
   const coinbaseUTXO = new UTXO(PUBLIC_KEY, BLOCK_REWARD);
   const coinbaseTX = new Transaction([], [coinbaseUTXO]);
   block.addTransaction(coinbaseTX);
 
-  while(BigInt('0x' + block.hash()) >= TARGET_DIFFICULTY) {
-    block.nonce++;
-  }
 
   block.execute();
 
   db.blockchain.addBlock(block);
 
-  console.log(`Mined block #${db.blockchain.blockHeight()} with a hash of ${block.hash()} at nonce ${block.nonce}`);
+  console.log(`Mined block #${db.blockchain.blockHeight()} with a hash of ${block.hash()} at nonce ${block.nonce} and found new prime ${block.prime}`);
 
   setTimeout(mine, 2500);
+}
+
+const isPrime = (num) => {
+  let sqrtnum = Math.floor(Math.sqrt(num));
+  let prime = num !== 1;
+  for(let i = 2; i < sqrtnum + 1; i++){
+     if(num % i === 0){
+        prime = false;
+        break;
+     };
+  };
+  return prime;
 }
 
 module.exports = {
