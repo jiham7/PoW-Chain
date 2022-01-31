@@ -2,6 +2,10 @@
 
 This is an example Proof of Work Chain with a client/server application for rewarding miners who can solve real-world solutions like finding the next prime.
 
+The main idea is to use the processing power from mining to contribute towards useful calculations like calculating prime numbers. Other ideas that can be implemented in future are reinforcing machine learning algorithms and rewarding miners who can successfully label an image properly and such. 
+
+I just feel like it is inefficient that proof of work makes miners spend so much energy and processing space / power to solve a puzzle that has no real significance outisde of the chain of blocks. 
+
 ## Server
 
 First you'll want to start the server. You'll want to install all the dependencies with `npm i` from the root directory in the terminal.
