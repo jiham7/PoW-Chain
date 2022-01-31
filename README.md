@@ -1,6 +1,6 @@
-# Proof of Work Chain
+# Proof of Prime Chain
 
-This is an example Proof of Work Chain with a client/server application.
+This is an example Proof of Work Chain with a client/server application for rewarding miners who can solve real-world solutions like finding the next prime.
 
 ## Server
 
