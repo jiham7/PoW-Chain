@@ -1,11 +1,11 @@
 const SHA256 = require('crypto-js/sha256');
 
 class Block {
-  constructor() {
+  constructor(num) {
     this.timestamp = Date.now();
-    this.nonce = 0;
+    this.nonce = 1;
     this.transactions = [];
-    this.prime = 0;
+    this.prime = num;
 
   }
   addTransaction(tx) {

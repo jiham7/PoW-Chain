@@ -13,7 +13,7 @@ class Blockchain {
     return this.currentPrime;
   }
   setPrime(num) {
-    return this.currentPrime = num;
+    this.currentPrime = num;
   }
 }
 
